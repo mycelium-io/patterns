@@ -1,0 +1,34 @@
+name: Validate
+
+# Every scenario is loaded through the hub's own code, so a scenario that passes
+# here is one a hub will load. The hub is checked out at its main branch on
+# purpose: the point is to notice when a change there stops a scenario fitting.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Check out the hub
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: mycelium-io/mycelium
+          path: mycelium
+          sparse-checkout: fastapi-backend
+
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+
+      - name: Validate the scenarios
+        env:
+          MYCELIUM_BACKEND: ${{ github.workspace }}/mycelium/fastapi-backend
+        run: uv run --project mycelium/fastapi-backend python scripts/validate.py
