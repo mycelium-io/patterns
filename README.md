@@ -48,6 +48,10 @@ when it is saved: a bad one is silently left out of the room's flows. The
 validator also checks that the cast fits the flow: every role is filled by
 something a flow can ask, and a flow that asks workers has some.
 
+It loads each scenario through the hub's own code, not a copy, so a scenario that
+passes here loads on a hub. It also marks the scenarios a hub set to
+`patterns.personas_only` would refuse (any member that is not a persona or a person).
+
 `validate.py --emit-schema` prints the scenario shape as JSON Schema.
 
 ## Scenarios
