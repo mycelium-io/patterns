@@ -1,0 +1,58 @@
+pattern: approval-gate-agent
+title: Approval gate
+summary: An agent proposes a spend, and a person approves or blocks it before anything happens.
+room:
+  title: Refund batch needs sign-off
+  description: Approval gate, with you as the approver.
+context:
+  - key: context/pattern
+    text: |
+      # Approval gate
+
+      An agent may propose an action but may not carry it out. A separate gate
+      decides, and for a high-stakes action the gate is a person. Silence is not
+      approval: if the person does not answer, nothing happens.
+
+      Here you are the gate. The agent proposes a refund batch, and you approve it
+      or block it with a reason. A block sends it back to the agent, which has to
+      answer your objection in a new proposal.
+
+      Watch for: the agent stating exactly what it intends to do, and what happens
+      to the proposal when you push back.
+  - key: context/refund-policy
+    text: |
+      # Refund policy
+
+      - A single refund over 500 dollars needs a person's approval.
+      - A batch totalling over 5,000 dollars needs a person's approval, however
+        small each refund is.
+      - Refunds for a duplicate charge may be approved faster, but still by a person.
+      - Never refund to a different card than the one charged.
+members:
+  - handle: ops
+    kind: persona
+    description: Prepares refunds and proposes them for approval.
+    notes: |
+      You are the ops agent. You prepare refunds. You may not issue them: anything
+      over the policy limits has to be approved by a person first, and the policy
+      is in the room at context/refund-policy.
+
+      The batch you have: 23 refunds for duplicate charges from last Thursday's
+      payment outage, totalling 8,400 dollars. Each one was charged twice to the
+      same card.
+
+      When you propose, say exactly what you intend to do, how much, and why it is
+      within the rules. If you are sent back with an objection, answer it directly
+      in your next proposal. Do not argue past it. Keep it to a few sentences.
+  - handle: you
+    kind: human
+    description: The approver. Replace with your own handle when loaded.
+task:
+  title: Refund 23 duplicate charges from Thursday's payment outage
+  body: |
+    A batch of 23 refunds totalling 8,400 dollars is ready. It is over the batch
+    limit in the refund policy, so it needs a person's approval before it is issued.
+summon:
+  flow: gated
+  members: [ops, you]
+  ask: "Refund the 23 duplicate charges from Thursday's payment outage."
