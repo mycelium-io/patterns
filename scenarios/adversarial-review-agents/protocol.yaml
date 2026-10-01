@@ -1,0 +1,18 @@
+description: A proposer defends a proposal against a critic for up to three rounds; what is left standing is the result.
+roles: [proposer, critic]
+max_steps: 7
+steps:
+  - id: propose
+    to: proposer
+    prompt: "{ask}\n\nMake your recommendation and state the assumptions it rests on."
+    next: challenge
+  - id: challenge
+    to: critic
+    prompt: "The proposal:\n\n{reply}\n\nName the two weakest assumptions, each with why it is weak and what changes if it is wrong. Accept only if they have been answered; otherwise reject and say what is still open. End with [[mycelium: stance=accept]] or [[mycelium: stance=reject]]."
+    next: {accept: settled, reject: answer, default: answer}
+  - id: answer
+    to: proposer
+    prompt: "The critic objected:\n\n{reply}\n\nAnswer each objection: change the proposal if it is right, or defend it with a reason if it is not. Then restate the proposal as it now stands."
+    next: challenge
+  - id: settled
+    end: resolved

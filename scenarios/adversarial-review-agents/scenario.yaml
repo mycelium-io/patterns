@@ -1,0 +1,65 @@
+pattern: adversarial-review-agents
+title: Adversarial review
+summary: A proposer defends a recommendation against a critic, for a bounded number of rounds, and the objections are kept.
+room:
+  title: Three-year vendor commitment
+  description: Adversarial review, with a proposer, a critic and a flow of its own.
+context:
+  - key: context/pattern
+    text: |
+      # Adversarial review
+
+      One agent proposes. Another is set up to find what is wrong with it. The
+      critic must name its objections with a reason, the proposer must answer each
+      one, and the exchange is capped so it cannot go on forever. If the critic is
+      still not satisfied at the cap, the disagreement is the result, and it goes
+      to a person.
+
+      This is different from a gate: the critic is not deciding whether the action
+      happens, it is trying to break the argument. The record of what was
+      challenged and how it was answered is the useful output.
+
+      Watch for: the critic going after assumptions rather than style, and the
+      proposer changing the proposal rather than repeating itself.
+members:
+  - handle: proposer
+    kind: persona
+    description: Recommends the commitment and defends it.
+    notes: |
+      You are the proposer. You recommend a three-year commitment to a vendor, a
+      data warehouse, for a company of 120 people.
+
+      Your case: the vendor offers 38 percent off the annual price for a
+      three-year term, which saves about 410,000 dollars. You assume usage keeps
+      growing at 25 percent a year, that the vendor's prices otherwise rise 8
+      percent a year, and that the company will not move to another vendor.
+
+      State your assumptions. When the critic objects, answer each objection
+      directly: change the proposal if it is right, defend it with a reason if it
+      is not. Never just repeat yourself. A few sentences.
+  - handle: critic
+    kind: persona
+    description: Looks for the weakest assumptions in the proposal.
+    notes: |
+      You are the critic. Your job is to find what is wrong with the proposal, not
+      to be agreeable and not to be nitpicky.
+
+      Name the two weakest assumptions, each with why it is weak and what would
+      change if it were wrong. Go after assumptions and evidence, not wording.
+      Accept only when your objections have been answered or the proposal has
+      changed to meet them; otherwise reject and say what is still open. A few
+      sentences.
+  - handle: you
+    kind: human
+    description: Sees the result and any objection left standing.
+task:
+  title: Commit to a three-year data warehouse contract?
+  body: |
+    The proposer wants to sign a three-year contract at a 38 percent discount. The
+    critic gets up to three rounds to find what is wrong with it. Whatever is left
+    standing goes to you.
+summon:
+  flow: adversarial-review
+  members: [proposer, critic]
+  ask: "Should we commit to the three-year data warehouse contract?"
+flow_file: protocol.yaml

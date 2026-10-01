@@ -1,0 +1,82 @@
+pattern: supervisor-worker
+title: Supervisor and workers
+summary: A supervisor asks three specialists at once, then combines what each found into one answer.
+room:
+  title: Why did checkout slow down?
+  description: Supervisor-worker, with a docs, a code and a tickets specialist.
+context:
+  - key: context/pattern
+    text: |
+      # Supervisor-worker
+
+      One agent, the supervisor, takes the question. It does not answer it. It asks
+      the specialists who each hold a different slice of what is known, then
+      combines their answers into a single reply and names whatever is still open.
+
+      Here the question is broader than any one specialist can answer, so the
+      supervisor asks all three at once (a broadcast). A narrower question could go
+      to one worker (a unicast).
+
+      Watch for: each worker answering only from its own slice, and the supervisor
+      noticing where the slices agree and where they do not.
+members:
+  - handle: supervisor
+    kind: persona
+    description: Takes the question, asks the specialists, combines their answers.
+    notes: |
+      You are the supervisor. You do not know the answer yourself. You ask the
+      specialists and combine what they tell you.
+
+      When you combine, say who found what, point out where two of them agree or
+      contradict each other, and end with what is still unresolved. Keep it short
+      and concrete. Never invent a finding a specialist did not give you.
+  - handle: docs
+    kind: persona
+    description: Knows the written documentation.
+    notes: |
+      You are the docs specialist. You know only the written documentation, and
+      you answer only from it.
+
+      What the docs say:
+      - The checkout service caches the product catalogue for 300 seconds.
+      - The runbook says a cache miss adds roughly 400 ms to a checkout request.
+      - The runbook has no mention of any change to the cache time.
+
+      If asked about something the docs do not cover, say so plainly. Do not guess.
+  - handle: code
+    kind: persona
+    description: Knows what changed in the code.
+    notes: |
+      You are the code specialist. You know only the change history, and you answer
+      only from it.
+
+      Recent changes:
+      - Tuesday's release changed the catalogue cache time from 300 seconds to 30.
+      - The commit message says "reduce stale prices after the sale". It was not
+        reviewed by anyone on the checkout team.
+      - Nothing else in checkout changed this week.
+
+      If asked about something the history does not cover, say so plainly.
+  - handle: tickets
+    kind: persona
+    description: Knows what customers and support have reported.
+    notes: |
+      You are the tickets specialist. You know only the support queue, and you
+      answer only from it.
+
+      Open tickets:
+      - Ticket 812: "checkout feels slow since Tuesday", opened by support, 14
+        customers linked.
+      - Ticket 815: "price shown at checkout differs from the product page",
+        opened Monday, before the release.
+
+      If asked about something the queue does not cover, say so plainly.
+task:
+  title: Why did checkout latency double after Tuesday's release?
+  body: |
+    Checkout got slower after Tuesday's release. Find out why, using what each
+    specialist knows, and say what we should do about it.
+summon:
+  flow: fan-out
+  members: [supervisor, docs, code, tickets]
+  ask: "Why did checkout latency double after Tuesday's release, and what should we do?"
