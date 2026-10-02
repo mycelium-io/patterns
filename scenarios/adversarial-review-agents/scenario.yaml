@@ -63,3 +63,36 @@ summon:
   members: [proposer, critic]
   ask: "Should we commit to the three-year data warehouse contract?"
 flow_file: protocol.yaml
+before:
+  headline: Sign for three years at 38% off
+  detail: >-
+    Saves about $410,000, assuming usage grows 25% a year, prices otherwise rise
+    8% a year, and the company never switches vendors.
+after:
+  track: >-
+    The recommendation as it now stands, the saving it claims, and which of the
+    critic's objections have been answered, met by a change, or left open.
+guide:
+  - at: before
+    title: Where it starts
+    text: >-
+      This is the proposer's recommendation as it walks in: a large saving that
+      rests on three assumptions nobody has checked yet.
+  - at: members
+    title: Two agents, two jobs
+    text: >-
+      The proposer defends the deal. The critic is told to break it, on
+      substance rather than wording. Neither is scripted: each is a model playing
+      a role written in plain English.
+  - at: flow
+    title: The rules of the exchange
+    text: >-
+      The critic objects, the proposer answers, and it goes round again, at most
+      three times. The conductor follows this graph to decide whose turn it is.
+      It has no model of its own.
+  - at: after
+    title: Watch it move
+    text: >-
+      This fills in as they argue. Watch the saving: when an objection lands, the
+      proposal changes rather than repeating itself. Anything still open at the
+      end comes to you.
