@@ -32,8 +32,12 @@ traced back to the pattern it shows.
 | `task` | `{title, body}`. The board row the flow runs in. |
 | `summon` | `{flow, members, ask}`. Optional. `members` is the cast in order: the first ones fill the flow's roles, the rest are its workers. |
 | `flow_file` | A flow beside the scenario. Without it, `summon.flow` must be a built-in. |
+| `before` | `{headline, detail}`. Optional. Where the run starts, for someone watching it: a line and a sentence or two. |
+| `after.track` | Optional. What the result is about, so a viewer can restate where the run stands as it goes and when it ends. |
+| `guide[]` | `{at, title, text}`, up to 8. Optional. A short walk through the run, one step per part of the screen: `at` is `before`, `after`, `members`, `flow`, `chat` or `turn` (the person's turn, so it needs a `human`). |
 
-The conductor is not listed as a member: loading registers it.
+The conductor is not listed as a member: loading registers it. `before`, `after`
+and `guide` are for whoever watches a run; loading writes none of them to the room.
 
 ## Validate
 

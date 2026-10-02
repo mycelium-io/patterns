@@ -56,3 +56,34 @@ summon:
   flow: gated
   members: [ops, you]
   ask: "Refund the 23 duplicate charges from Thursday's payment outage."
+before:
+  headline: $8,400 in refunds, ready to go
+  detail: >-
+    23 customers were charged twice in Thursday's outage. The batch is over the
+    $5,000 limit, so a person has to sign off before anything is issued.
+after:
+  track: >-
+    Whether the refunds were approved or are still held, what the approver asked
+    for, and how the proposal changed to meet it.
+guide:
+  - at: before
+    title: Where it starts
+    text: >-
+      A refund batch is ready, and it is over the limit a person has to approve.
+      Nothing has been refunded yet.
+  - at: members
+    title: An agent that cannot act alone
+    text: >-
+      ops can prepare refunds but may not issue them. You are in the room as the
+      approver.
+  - at: flow
+    title: A gate, not a suggestion
+    text: >-
+      The proposal goes to review. Approve and it ends; block and it goes back to
+      ops, which has to answer your reason. Silence is not approval: if you never
+      answer, nothing happens.
+  - at: turn
+    title: Your call
+    text: >-
+      Approve, or block with a reason. Try blocking once and watch ops answer
+      your objection instead of arguing past it.

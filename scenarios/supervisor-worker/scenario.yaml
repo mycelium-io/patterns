@@ -80,3 +80,33 @@ summon:
   flow: fan-out
   members: [supervisor, docs, code, tickets]
   ask: "Why did checkout latency double after Tuesday's release, and what should we do?"
+before:
+  headline: Checkout is twice as slow, and nobody knows why
+  detail: >-
+    Three specialists each hold one slice of what is known: the docs, the code
+    history and the support queue.
+after:
+  track: >-
+    The cause the team settled on, the evidence each specialist gave for it, what
+    to do about it, and what is still unexplained.
+guide:
+  - at: before
+    title: Where it starts
+    text: >-
+      A slowdown with no explanation. The answer exists, but it is split across
+      three people who each see one part.
+  - at: members
+    title: Each one knows a slice
+    text: >-
+      The supervisor knows nothing itself. docs, code and tickets each answer only
+      from their own source, and say so when they cannot.
+  - at: flow
+    title: Ask everyone at once
+    text: >-
+      The supervisor puts the question to all three together, then combines what
+      comes back. A narrower question could go to just one of them.
+  - at: after
+    title: One answer, with its sources
+    text: >-
+      The result says who found what, where they agree and what is still open. No
+      specialist saw the whole picture; the answer needs all three.
