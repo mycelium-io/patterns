@@ -23,7 +23,7 @@ scenarios/<pattern>/
 | `title`, `summary` | What the scenario is, for a list. |
 | `room.title`, `room.description` | The room it creates. |
 | `context[]` | `{key: context/<slug>, text}`. Written to the room's memory. |
-| `members[]` | `{handle, kind, description, notes}`. `kind` is `persona`, `worker`, `aligner`, `synthesizer`, `hello` or `human`. A persona or worker needs `notes`: its character. At most one `human`: the person who loads it. |
+| `members[]` | `{handle, kind, description, notes}`. `kind` is `persona`, `worker`, `synthesizer`, `hello` or `human`. To have members negotiate, summon the conductor's `concord` flow with them; there is no `aligner` kind. A persona or worker needs `notes`: its character. At most one `human`: the person who loads it. |
 | `task` | `{title, body}`. The board row the flow runs in. |
 | `summon` | `{flow, members, ask}`. Optional. `members` is the cast in order: the first ones fill the flow's roles, the rest are its workers. |
 | `flow_file` | A flow beside the scenario. Without it, `summon.flow` must be a built-in. |
